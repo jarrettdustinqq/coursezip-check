@@ -8,7 +8,7 @@ This preview is for e-learning developers and LMS administrators checking incomi
 
 ## Status and limits
 
-Automated engine checks cover 41 synthetic packages plus safety and distribution checks. Full browser interaction testing is still pending: do not use this preview as a release approval gate. Native raw DEFLATE support is required; unsupported browsers receive an error. The code does not execute course scripts.
+Automated engine checks cover 41 synthetic packages plus safety and distribution checks. The free preview passed 48 offline Chromium checks on a GitHub-hosted Ubuntu runner, including file selection, drag/drop, recovery and a >1 GiB sparse archive. Other browsers, operating systems and real customer exports remain unverified; this is not a release approval gate. Native raw DEFLATE support is required; unsupported browsers receive an error. The code does not execute course scripts.
 
 It checks ZIP directory structure, exact `imsmanifest.xml` placement, manifest checksum/XML, declared resource/file paths, case differences, XML base paths, and resource identifiers. “No issues found” applies only to these checks. It does not certify SCORM conformance, validate schemas, test LMS launch/tracking, verify every file’s checksum, scan malware, or inspect dynamically loaded assets. Free LMS testing tools such as [SCORM Cloud](https://rusticisoftware.com/products/scorm-cloud/) remain useful for runtime testing.
 
@@ -31,7 +31,7 @@ npm ci --ignore-scripts --no-audit --no-fund
 npm test
 ```
 
-The XML adapter is a development-only dependency; the distributed HTML uses browser-native XML and decompression. Tests evaluate the engine extracted from the distributed HTML in a context with network APIs absent. This does not substitute for browser interaction and download verification.
+The XML adapter is a development-only dependency; the distributed HTML uses browser-native XML and decompression. Tests evaluate the engine extracted from the distributed HTML in a context with network APIs absent. A separate hosted Chromium job exercises the actual file-input UI with networking disabled; its artifact hash matches the public release. See [the verified run](https://github.com/jarrettdustinqq/coursezip-check/actions/runs/33990190580) for the exact scope.
 
 ## Privacy
 
