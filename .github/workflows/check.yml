@@ -57,7 +57,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-        run: python3 tests/remote_snapshot.py
+        run: |
+          python3 -m unittest discover -s tests -p 'test_interest_evidence.py' -v
+          python3 tests/remote_snapshot.py
       - name: Deliberate recovery drill
         if: ${{ inputs.failure_probe == true }}
         run: |

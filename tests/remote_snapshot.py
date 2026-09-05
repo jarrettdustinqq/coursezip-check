@@ -1,6 +1,7 @@
 """Read public release/interest evidence. No sales claims and no external messages."""
 from pathlib import Path
 import hashlib,json,os,subprocess,tempfile
+from interest_evidence import read_issues, summarize
 repo=os.environ['REPO']
 def api(endpoint):
     return json.loads(subprocess.check_output(['gh','api',endpoint],text=True))
@@ -17,9 +18,10 @@ if release:
     lines += ['Public release download matches the committed artifact.',f"Platform download counter before this run: {asset['download_count']}. This includes our automated checks; it is not a buyer count."]
 else:
     lines += ['No published preview yet; release delivery check deferred.']
-issues=api(f'repos/{repo}/issues?state=all&per_page=100')
-interest=[i for i in issues if not i.get('pull_request') and i['title'].startswith('Batch edition interest')]
-lines += [f'Public interest-form issues in the latest 100 issues: {len(interest)}. These are nonbinding and require qualification; they are not sales.',
+interest=summarize(read_issues(repo),repo.split('/')[0])
+lines += ['Interest evidence across all available issue pages: '+json.dumps(interest,sort_keys=True),
+'Owner and recognized bot submissions are excluded from external-account counts; repeated submissions from one account count once. Distinct accounts are not verified independent people. Manual qualification must establish actual recurring work, relevant need and stated-price interest; these counts are not sales.',
+'No external responses or insufficient qualified exposure is inconclusive, not evidence that nobody wants the product.',
 'No checkout, receipts, payout status, or private customer content is accessed by this workflow.',
 'Inspect in Actions. Stop by disabling this workflow. Recover a transient failure with a manual run; code failures require a fix.',
 'Scheduled trigger registration does not prove a scheduled run has happened. Business adaptation and customer support are not automated by this workflow.']
