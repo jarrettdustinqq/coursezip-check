@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NgAkAs6Qq5I+pXw7ftAznoszYj9+LyHKDWbkAJg1ZnM='; style-src 'unsafe-inline'; connect-src 'none'; img-src 'none'; font-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>CourseZip Check — Free offline preview</title>
+<meta name="description" content="Inspect SCORM package structure and declared file references locally. Batch checks and exportable reports; no course upload.">
+<style>
+:root{color-scheme:light;--ink:#182e2a;--soft:#556762;--paper:#f6f5ef;--line:#d7ded7;--green:#195d47;--pale:#e8efe6;--red:#9c3327;--amber:#82520c}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer;border:1px solid var(--line);border-radius:7px;padding:.7rem 1rem;color:var(--ink);background:#fff;font-weight:600}button:hover{border-color:var(--green);background:#f2f6ef}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid #bd6d28;outline-offset:4px}a{color:var(--green)}.wrap{max-width:1100px;padding:0 28px;margin:auto}header{border-bottom:1px solid var(--line);padding:22px 0}header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{font-weight:750;letter-spacing:-.5px}.brand span{display:inline-grid;place-items:center;width:28px;height:28px;background:var(--green);border-radius:6px;color:#fff;margin-right:8px;font-size:14px}.tag,.eyebrow{font:600 12px/1.4 ui-monospace,monospace;letter-spacing:1.2px;text-transform:uppercase}.tag{color:var(--soft)}main{padding-top:56px;padding-bottom:40px}.hero{display:grid;grid-template-columns:1.6fr 1fr;gap:50px;align-items:end;margin-bottom:35px}.eyebrow{color:var(--green);margin-bottom:16px}h1{font-size:clamp(32px,5vw,52px);line-height:1.08;letter-spacing:-2px;margin:0;max-width:640px}h2{font-size:22px;letter-spacing:-.5px;margin:0 0 12px}p{margin:0 0 16px}.muted,.hero p{color:var(--soft)}.hero p{margin-bottom:0}.drop{border:2px dashed #9aac9e;border-radius:12px;padding:34px;background:#fff;text-align:center;transition:background .15s}.drop.over{background:var(--pale);border-color:var(--green)}.drop p{margin:4px 0 18px}.primary{background:var(--green);color:#fff;border-color:var(--green)}.primary:hover{background:#124b38;color:#fff}.small{font-size:13px;color:var(--soft)}.drop .small{margin:16px 0 0}.privacy{display:flex;gap:12px;padding:17px 0;color:var(--soft);font-size:13px}.privacy strong{color:var(--green)}.row{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.toolbar{display:flex;gap:9px;flex-wrap:wrap}.toolbar button{font-size:13px;padding:.55rem .8rem}.notice{padding:15px;border-radius:7px;margin:16px 0;background:#fff0d9;color:#674100}.notice[hidden],section[hidden]{display:none}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0}.metric{border-top:2px solid var(--line);padding-top:10px;font-size:13px;color:var(--soft)}.metric strong{display:block;font-size:28px;line-height:1.4;color:var(--ink);font-weight:600}.results{margin-top:30px}.result{background:#fff;border:1px solid var(--line);border-radius:9px;padding:20px;margin:12px 0}.result summary{cursor:pointer;display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.filename{font-weight:650;overflow-wrap:anywhere;display:block}.meta{font-size:12px;color:var(--soft);display:block;margin-top:3px}.badge{font-size:12px;font-weight:700;white-space:nowrap;border-radius:20px;padding:5px 10px;background:#e9f0e8;color:var(--green)}.badge.issues,.badge.incomplete{background:#fbe9e4;color:var(--red)}.badge.review{background:#fff0d8;color:var(--amber)}.finding{border-top:1px solid #e8ebe5;padding:12px 0 2px;font-size:14px}.finding:first-child{margin-top:17px}.finding strong{display:block;color:var(--red);font-size:12px;text-transform:uppercase;letter-spacing:.6px}.finding.warning strong{color:var(--amber)}.path{display:block;overflow-wrap:anywhere;font:12px/1.5 ui-monospace,monospace;color:var(--soft);margin-top:5px;white-space:pre-wrap}.scope{display:grid;grid-template-columns:1fr 1fr;gap:30px;border-top:1px solid var(--line);padding-top:28px;margin-top:40px;font-size:14px}.scope h2{font-size:17px}.scope ul{padding-left:19px;margin:0;color:var(--soft)}footer{margin-top:35px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--soft)}.status{font-size:14px;color:var(--green);min-height:24px;margin:12px 0}.file-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}.file-input:focus+button{outline:3px solid #bd6d28}.limit{font-size:12px}.report-note{margin:16px 0 0;font-size:13px;color:var(--soft)}@media(max-width:700px){.wrap{padding:0 18px}main{padding-top:32px}.hero{grid-template-columns:1fr;gap:20px}.drop{padding:26px 15px}.scope{grid-template-columns:1fr}.tag{font-size:10px}.summary{gap:8px}.metric{font-size:11px}.metric strong{font-size:23px}.result{padding:15px}.result summary{flex-wrap:wrap}h1{letter-spacing:-1.2px}}@media print{.drop,.privacy,.toolbar,header,.scope,footer{display:none}.wrap{max-width:none}.result{break-inside:avoid}.hero{margin-bottom:10px}body{background:#fff}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="brand"><span>CZ</span>CourseZip Check</div><div class="tag">Free single-package preview · 0.1.0</div></div></header>
+<main class="wrap">
+<div class="hero"><div><div class="eyebrow">Before the LMS upload</div><h1>Catch packaging problems.<br>Keep your courses local.</h1></div><p>Check SCORM ZIPs for a misplaced manifest, missing declared files, and mismatched paths. Try the free single-package preview before your LMS test.</p></div>
+<div id="drop" class="drop"><h2>Drop a course ZIP here</h2><p class="muted">Check one package at a time. Your files stay on your device.</p><input class="file-input" id="files" type="file" accept=".zip,application/zip" aria-label="Choose course ZIP files"><button id="choose" class="primary">Choose a ZIP file</button> <button id="sample">Try a sample package</button><p class="small">2 GiB per ZIP · UTF-8 filenames or ASCII</p></div>
+<div class="privacy"><strong>Local by design</strong><span>No uploads, accounts, analytics, or external scripts. Works without an internet connection. Nothing is saved until you export a report.</span></div>
+<div id="notice" class="notice" role="alert" hidden></div><div id="status" class="status" role="status" aria-live="polite">Ready to check. Your original ZIP files are never modified.</div>
+<section id="results" class="results" aria-label="Package check results" hidden><div class="row"><h2>Package report</h2><div class="toolbar"><button id="clear">Clear result</button></div></div><div id="metrics" class="summary"></div><div id="cards"></div><p class="report-note">“No issues found” means only that the checks below passed. Test launch, tracking, completion, and scoring in your LMS before release. Exported reports include course and file names; review them before sharing.</p></section>
+<div class="notice"><strong>Would batch checks save you time?</strong><p>A batch edition with readable, JSON, and CSV reports is being evaluated at $19 once. It is not for sale yet. If you handle course batches, register nonbinding interest through the project’s public GitHub form. Do not include course files or private client details.</p><a href="https://github.com/jarrettdustinqq/coursezip-check/issues/new?template=batch-interest.yml" rel="noreferrer">Register batch-edition interest</a></div><div class="scope"><div><h2>What this checks</h2><ul><li>ZIP directory structure and unsafe paths</li><li>Exact root <code>imsmanifest.xml</code> placement</li><li>Manifest checksum and well-formed XML</li><li>Declared resource/file paths, letter case, and identifier references</li><li>Package-relative paths, XML base paths, and external dependencies</li></ul></div><div><h2>Where the check stops</h2><ul><li>No SCORM certification or XML schema validation</li><li>No execution, full archive integrity scan, malware scan, or inspection of scripts and dynamically loaded assets</li><li>No LMS launch, completion, scoring, or accessibility test</li><li>ZIP64, encryption, split ZIPs, symlinks, legacy filename encodings, DTDs, and sub-manifests are unsupported</li><li>Limits: 10,000 ZIP entries, 4 MiB directory, 2 MiB manifest, 30,000 XML elements, 300 displayed findings per package</li></ul></div></div>
+<footer>CourseZip Check · Free preview for validation · Browser compatibility testing is still pending · Created for Jarrett Robertson<br>Use a current browser with raw DEFLATE support. If decompression is unavailable, the check stops with a message. Close this file to stop it; there are no background tasks.</footer>
+</main>
+<script>
+/* CourseZip Check 0.1.0 — owned by Jarrett. Packaging checks only. */
+const CourseZip = (() => {
+  'use strict';
+  const VERSION = '0.1.0';
+  const LIMITS = Object.freeze({ archive: 2 * 1024 * 1024 * 1024, entries: 10000,
+    directory: 4 * 1024 * 1024, manifest: 2 * 1024 * 1024, nodes: 30000, findings: 300 });
+  const utf8 = new TextDecoder('utf-8', { fatal: true });
+  const fail = (message) => { throw new Error(message); };
+  const crcTable = Uint32Array.from({ length: 256 }, (_, n) => {
+    for (let k = 0; k < 8; k++) n = n & 1 ? 0xedb88320 ^ (n >>> 1) : n >>> 1;
+    return n >>> 0;
+  });
+  function crc32(bytes) {
+    let c = 0xffffffff;
+    for (const b of bytes) c = crcTable[(c ^ b) & 255] ^ (c >>> 8);
+    return (c ^ 0xffffffff) >>> 0;
+  }
+  const view = bytes => new DataView(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  async function bytesAt(blob, start, length) {
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(length) || start < 0 || length < 0 || start + length > blob.size)
+      fail('Truncated ZIP: a declared record extends beyond the file.');
+    return new Uint8Array(await blob.slice(start, start + length).arrayBuffer());
+  }
+  function zipName(bytes, flags) {
+    if (!(flags & 0x800) && bytes.some(b => b > 127))
+      fail('A ZIP filename uses an unsupported legacy encoding. Re-export with UTF-8 filenames.');
+    const name = utf8.decode(bytes);
+    if (!name || /[\\\x00-\x1f\x7f]/.test(name) || name.startsWith('/') || /^[a-z]:/i.test(name) ||
+        name.split('/').some(p => p === '..' || p === '.') || name.includes('//'))
+      fail('An unsafe or ambiguous ZIP path was found. Re-export the package; no files were extracted.');
+    return name;
+  }
+  async function readDirectory(blob) {
+    if (blob.size > LIMITS.archive) fail('This edition accepts ZIPs up to 2 GiB.');
+    if (blob.size < 22) fail('This file is too short to be a ZIP archive.');
+    const tailStart = Math.max(0, blob.size - 65557);
+    const tail = await bytesAt(blob, tailStart, blob.size - tailStart), t = view(tail);
+    let end = -1;
+    for (let i = tail.length - 22; i >= 0; i--) {
+      if (t.getUint32(i, true) === 0x06054b50 && i + 22 + t.getUint16(i + 20, true) === tail.length) { end = i; break; }
+    }
+    if (end < 0) fail('The ZIP end record is missing or damaged.');
+    const count = t.getUint16(end + 10, true), size = t.getUint32(end + 12, true), offset = t.getUint32(end + 16, true);
+    if (t.getUint16(end + 4, true) || t.getUint16(end + 6, true) || t.getUint16(end + 8, true) !== count)
+      fail('Split or multi-disk ZIPs are unsupported.');
+    if (count === 65535 || size === 0xffffffff || offset === 0xffffffff) fail('ZIP64 archives are unsupported.');
+    if (count > LIMITS.entries || size > LIMITS.directory) fail('The ZIP exceeds the 10,000-entry or 4 MiB directory limit.');
+    if (offset + size !== tailStart + end) fail('The ZIP directory layout is unsupported or damaged.');
+    const bytes = await bytesAt(blob, offset, size), d = view(bytes), entries = new Map(), folded = new Map();
+    let p = 0;
+    for (let i = 0; i < count; i++) {
+      if (p + 46 > size || d.getUint32(p, true) !== 0x02014b50) fail('A ZIP directory record is damaged.');
+      const flags = d.getUint16(p + 8, true), method = d.getUint16(p + 10, true);
+      const packed = d.getUint32(p + 20, true), unpacked = d.getUint32(p + 24, true);
+      const nl = d.getUint16(p + 28, true), el = d.getUint16(p + 30, true), cl = d.getUint16(p + 32, true);
+      const local = d.getUint32(p + 42, true);
+      if (p + 46 + nl + el + cl > size) fail('A ZIP filename or extra field is truncated.');
+      if (d.getUint16(p + 34, true)) fail('Multi-disk entries are unsupported.');
+      if ([packed, unpacked, local].includes(0xffffffff)) fail('ZIP64 entries are unsupported.');
+      if (flags & (1 | 64 | 8192)) fail('Encrypted ZIP entries are unsupported.');
+      if (method !== 0 && method !== 8) fail('Only stored and deflated ZIP entries are supported.');
+      if (((d.getUint32(p + 38, true) >>> 16) & 0xf000) === 0xa000) fail('Symbolic links are unsupported.');
+      if (local + 30 + packed > offset) fail('A ZIP entry overlaps the directory or is truncated.');
+      const nameBytes = bytes.slice(p + 46, p + 46 + nl), name = zipName(nameBytes, flags);
+      if (entries.has(name)) fail('Duplicate ZIP filenames make this package ambiguous.');
+      const item = { name, nameBytes, flags, method, packed, unpacked, local, crc: d.getUint32(p + 16, true) };
+      entries.set(name, item);
+      const lower = name.toLowerCase();
+      if (!folded.has(lower)) folded.set(lower, []);
+      folded.get(lower).push(name);
+      p += 46 + nl + el + cl;
+    }
+    if (p !== size) fail('Unexpected data remains in the ZIP directory.');
+    return { entries, folded, offset };
+  }
+  async function readManifest(blob, item, directoryOffset) {
+    if (item.unpacked > LIMITS.manifest || item.packed > LIMITS.manifest)
+      fail('The manifest exceeds this edition’s 2 MiB limit.');
+    const h = view(await bytesAt(blob, item.local, 30));
+    if (h.getUint32(0, true) !== 0x04034b50 || h.getUint16(6, true) !== item.flags || h.getUint16(8, true) !== item.method)
+      fail('The manifest’s local ZIP header does not match the directory.');
+    const n = h.getUint16(26, true), extra = h.getUint16(28, true);
+    const localName = await bytesAt(blob, item.local + 30, n);
+    if (n !== item.nameBytes.length || localName.some((b, i) => b !== item.nameBytes[i])) fail('The manifest has conflicting ZIP filenames.');
+    if (!(item.flags & 8) && (h.getUint32(14, true) !== item.crc || h.getUint32(18, true) !== item.packed || h.getUint32(22, true) !== item.unpacked))
+      fail('The manifest’s local sizes or checksum do not match the directory.');
+    const start = item.local + 30 + n + extra;
+    if (start + item.packed > directoryOffset) fail('The manifest overlaps the ZIP directory.');
+    let result;
+    if (item.method === 0) {
+      result = await bytesAt(blob, start, item.packed);
+    } else {
+      let decoder;
+      try { decoder = new DecompressionStream('deflate-raw'); }
+      catch { fail('This browser lacks raw ZIP decompression. Use a current Chrome, Edge, or Firefox browser.'); }
+      const reader = blob.slice(start, start + item.packed).stream().pipeThrough(decoder).getReader();
+      const chunks = []; let total = 0;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          total += value.length;
+          if (total > LIMITS.manifest || total > item.unpacked) {
+            await reader.cancel(); fail('Manifest inflation exceeded its declared size or the 2 MiB safety limit.');
+          }
+          chunks.push(value);
+        }
+      } finally { reader.releaseLock(); }
+      result = new Uint8Array(total); let at = 0;
+      for (const chunk of chunks) { result.set(chunk, at); at += chunk.length; }
+    }
+    if (result.length !== item.unpacked || crc32(result) !== item.crc) fail('The manifest failed its ZIP size or checksum check.');
+    let encoding = 'utf-8';
+    if ((result[0] === 255 && result[1] === 254) || (result[0] === 60 && result[1] === 0)) encoding = 'utf-16le';
+    if ((result[0] === 254 && result[1] === 255) || (result[0] === 0 && result[1] === 60)) encoding = 'utf-16be';
+    const xml = new TextDecoder(encoding, { fatal: true }).decode(result);
+    const declaration = xml.match(/^\s*<\?xml\s[^?]*encoding\s*=\s*['"]([^'"]+)/i);
+    if (declaration && !/^utf-(8|16|16le|16be)$/i.test(declaration[1])) fail('Only UTF-8 and UTF-16 XML manifests are supported.');
+    return xml;
+  }
+  function resolveReference(node, href) {
+    const bases = []; let parent = node;
+    while (parent && parent.nodeType === 1) {
+      const base = parent.getAttributeNS('http://www.w3.org/XML/1998/namespace', 'base');
+      if (base) bases.unshift(base);
+      parent = parent.parentNode;
+    }
+    let base = new URL('https://coursezip.invalid/'), external = false;
+    for (const raw of [...bases, href]) {
+      if (/[\\\x00-\x20\x7f]/.test(raw.replace(/ /g, '')) || /%(?:2f|5c)/i.test(raw)) fail('Backslashes, encoded separators, or control characters are unsupported in a reference.');
+      const path = raw.split(/[?#]/, 1)[0];
+      let decoded;
+      try { decoded = decodeURIComponent(path); } catch { fail('A reference has invalid percent encoding.'); }
+      if (/[\x00-\x1f\x7f]/.test(decoded)) fail('A reference contains an encoded control character.');
+      const explicitScheme = /^[a-z][a-z0-9+.-]*:/i.test(raw), networkPath = raw.startsWith('//');
+      if (raw !== raw.trim()) fail('A reference has ambiguous leading or trailing whitespace.');
+      if (explicitScheme || networkPath) external = true;
+      if (raw.startsWith('/') && !networkPath && base.origin === 'https://coursezip.invalid') fail('A root-relative reference depends on the LMS server. Export a package-relative path.');
+      if (!explicitScheme && !networkPath && base.origin === 'https://coursezip.invalid') {
+        const parts = decodeURIComponent(base.pathname).split('/').slice(1, -1);
+        for (const part of decoded.split('/')) {
+          if (part === '..') { if (!parts.length) fail('A reference escapes the package root.'); parts.pop(); }
+          else if (part && part !== '.') parts.push(part);
+        }
+      }
+      const next = new URL(raw, base);
+      if (!['http:', 'https:'].includes(next.protocol)) fail('A reference uses an unsupported URL scheme.');
+      base = next;
+    }
+    if (external || base.origin !== 'https://coursezip.invalid') return { external: true };
+    return { path: decodeURIComponent(base.pathname.slice(1)) };
+  }
+  async function inspect(blob, name = blob.name || 'course.zip', parseXML) {
+    const report = { version: VERSION, name, bytes: blob.size, checkedAt: new Date().toISOString(),
+      status: 'incomplete', entries: 0, references: 0, scormVersion: 'Not established', findings: [], suppressedFindings: 0,
+      scope: 'ZIP directory, root manifest, manifest integrity/XML and declared resource/file references. No course execution, schema certification, full archive integrity, or LMS compatibility test.' };
+    let errorCount = 0, warningCount = 0;
+    const add = (severity, code, message, path = '') => {
+      if (severity === 'error') errorCount++; else if (severity === 'warning') warningCount++;
+      if (report.findings.length < LIMITS.findings) report.findings.push({ severity, code, message, path });
+      else report.suppressedFindings++;
+    };
+    try {
+      const dir = await readDirectory(blob); report.entries = dir.entries.size;
+      for (const names of dir.folded.values()) if (names.length > 1)
+        add('warning', 'case-collision', 'These names differ only by letter case; extraction behavior can vary.', names.join(' | '));
+      let manifest = dir.entries.get('imsmanifest.xml');
+      if (!manifest) {
+        const candidates = [...dir.entries.keys()].filter(n => /(^|\/)imsmanifest\.xml$/i.test(n));
+        add('error', 'root-manifest', candidates.length ? 'imsmanifest.xml must be named exactly this way at the ZIP root. Re-export, or re-zip the contents of the enclosing folder.' : 'No imsmanifest.xml was found. Check that this is a SCORM export.', candidates.slice(0, 10).join(' | '));
+        report.status = 'issues'; report.errorCount = errorCount; report.warningCount = warningCount; return report;
+      }
+      const xml = await readManifest(blob, manifest, dir.offset);
+      if (/<!\s*(DOCTYPE|ENTITY)\b/i.test(xml)) fail('Manifests with DTDs or entity declarations are not processed. Re-export without these declarations.');
+      const doc = parseXML ? parseXML(xml) : new DOMParser().parseFromString(xml, 'application/xml');
+      if (!doc.documentElement || doc.getElementsByTagNameNS('*', 'parsererror').length || doc.documentElement.localName === 'parsererror')
+        fail('The manifest is not well-formed XML. Re-export or correct it in the authoring source.');
+      const root = doc.documentElement;
+      if (root.localName !== 'manifest') fail('The XML root is not a manifest element.');
+      const all = Array.from(doc.getElementsByTagName('*'));
+      if (all.length > LIMITS.nodes) fail('The manifest exceeds the 30,000-element limit.');
+      const ns = root.namespaceURI;
+      const relevant = all.filter(n => n.namespaceURI === ns);
+      if (relevant.some(n => n !== root && n.localName === 'manifest'))
+        fail('Sub-manifests are outside this edition’s scope. Use an LMS test environment for this package.');
+      if (!['http://www.imsproject.org/xsd/imscp_rootv1p1p2', 'http://www.imsglobal.org/xsd/imscp_v1p1'].includes(ns))
+        add('warning', 'namespace', 'The manifest namespace is absent or unrecognized. No schema validation is performed.');
+      const schema = relevant.find(n => n.localName === 'schemaversion');
+      if (schema) report.scormVersion = schema.textContent.trim().slice(0, 100);
+      const resources = relevant.filter(n => n.localName === 'resource' && n.parentNode?.localName === 'resources');
+      const resourceSet = new Set(resources);
+      const ids = new Set(); let launchCount = 0;
+      for (const resource of resources) {
+        const id = resource.getAttribute('identifier');
+        if (!id) add('error', 'resource-id', 'A resource is missing its identifier.');
+        else if (ids.has(id)) add('error', 'duplicate-resource', 'Resource identifiers must be unique.', id);
+        ids.add(id);
+        if (resource.getAttribute('href')) launchCount++;
+      }
+      for (const node of relevant) {
+        if (node.localName === 'item' && node.getAttribute('identifierref') && !ids.has(node.getAttribute('identifierref')))
+          add('error', 'unknown-resource', 'An organization item refers to a missing resource identifier.', node.getAttribute('identifierref'));
+        if (node.localName === 'dependency' && !ids.has(node.getAttribute('identifierref')))
+          add('error', 'unknown-dependency', 'A dependency refers to a missing resource identifier.', node.getAttribute('identifierref') || '(empty)');
+        const isResource = resourceSet.has(node);
+        const isFile = node.localName === 'file' && resourceSet.has(node.parentNode);
+        if (!isResource && !isFile) continue;
+        const href = node.getAttribute('href');
+        if (!href) { if (isFile) add('error', 'empty-reference', 'A file element is missing its href.'); continue; }
+        report.references++;
+        try {
+          const resolved = resolveReference(node, href);
+          if (resolved.external) add('warning', 'external-reference', 'External reference: existence and availability were not checked.', href);
+          else if (!dir.entries.has(resolved.path) || resolved.path.endsWith('/')) {
+            const similar = dir.folded.get(resolved.path.toLowerCase());
+            if (similar) add('error', 'case-mismatch', 'Letter case does not match the ZIP path: ' + similar.join(' | '), resolved.path);
+            else add('error', 'missing-file', 'This declared file is absent from the ZIP directory.', resolved.path);
+          }
+        } catch (error) { add('error', 'invalid-reference', error.message, href); }
+      }
+      if (!launchCount) add('warning', 'no-launch', 'No resource launch href was found. Launch behavior has not been established.');
+      report.status = errorCount ? 'issues' : warningCount ? 'review' : 'clear';
+    } catch (error) {
+      add('error', 'incomplete', 'Check stopped: ' + (error.message || 'Unsupported or damaged package.'));
+      report.status = 'incomplete';
+    }
+    report.errorCount = errorCount; report.warningCount = warningCount;
+    return report;
+  }
+  return Object.freeze({ VERSION, LIMITS, inspect, crc32 });
+})();
+
+/* UI */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const labels = { clear: 'No issues found', review: 'Needs review', issues: 'Issues found', incomplete: 'Check incomplete' };
+  let reports = [], busy = false;
+  function notice(message) { $('notice').textContent = message; $('notice').hidden = !message; }
+  function element(tag, text, cls) {
+    const el = document.createElement(tag); if (text !== undefined) el.textContent = text; if (cls) el.className = cls; return el;
+  }
+  function render() {
+    $('results').hidden = !reports.length;
+    $('metrics').replaceChildren();
+    for (const key of ['clear', 'review', 'issues', 'incomplete']) {
+      const metric = element('div', undefined, 'metric'); metric.append(element('strong', reports.filter(r => r.status === key).length), element('span', labels[key])); $('metrics').append(metric);
+    }
+    $('cards').replaceChildren();
+    for (const r of reports) {
+      const card = element('details', undefined, 'result'); card.open = r.status !== 'clear';
+      const summary = element('summary'), info = element('span');
+      info.append(element('span', r.name, 'filename'), element('span', `${(r.bytes / 1048576).toFixed(2)} MiB · ${r.entries} entries · ${r.references} declared references · Version: ${r.scormVersion}`, 'meta'));
+      summary.append(info, element('span', labels[r.status], `badge ${r.status}`)); card.append(summary);
+      for (const f of r.findings) {
+        const row = element('div', undefined, `finding ${f.severity}`);
+        row.append(element('strong', f.code.replaceAll('-', ' ')), element('span', f.message));
+        if (f.path) row.append(element('code', f.path, 'path')); card.append(row);
+      }
+      if (!r.findings.length) card.append(element('p', 'No packaging issues were found within this checker’s scope.', 'finding'));
+      if (r.suppressedFindings) card.append(element('p', `${r.suppressedFindings} additional findings were omitted by the display limit.`, 'finding'));
+      $('cards').append(card);
+    }
+    
+  }
+  async function check(files) {
+    if (busy || !files.length) return;
+    notice('');
+    if (files.length > 1) { notice('Choose one package at a time. Nothing was checked.'); return; }
+    if (files.reduce((n, f) => n + f.size, 0) > 10 * 1024 * 1048576) { notice('This batch exceeds 10 GiB. Choose a smaller batch. Nothing was checked.'); return; }
+    busy = true; reports = []; render();
+    for (const id of ['choose', 'sample', 'clear', 'files']) $(id).disabled = true;
+    try {
+      for (const [i, file] of files.entries()) {
+        $('status').textContent = `Checking ${i + 1} of ${files.length}: ${file.name}`;
+        await new Promise(resolve => setTimeout(resolve, 0));
+        reports.push(await CourseZip.inspect(file)); render();
+      }
+      $('status').textContent = `Finished checking ${files.length} ${files.length === 1 ? 'package' : 'packages'}. Review the results before your LMS test.`;
+    } catch (error) {
+      notice('The batch stopped unexpectedly. Completed results remain available. Reload this file to retry a smaller batch.');
+      $('status').textContent = 'Batch stopped; inspect completed results.';
+    } finally {
+      busy = false;
+      for (const id of ['choose', 'sample', 'clear', 'files']) $(id).disabled = false;
+      $('files').value = ''; render();
+    }
+  }
+  $('choose').addEventListener('click', () => $('files').click());
+  $('files').addEventListener('change', event => check(Array.from(event.target.files)));
+  $('drop').addEventListener('dragover', event => { event.preventDefault(); if (!busy) $('drop').classList.add('over'); });
+  $('drop').addEventListener('dragleave', () => $('drop').classList.remove('over'));
+  $('drop').addEventListener('drop', event => { event.preventDefault(); $('drop').classList.remove('over'); check(Array.from(event.dataTransfer.files)); });
+  $('clear').addEventListener('click', () => { if (busy) return; reports = []; render(); notice(''); $('status').textContent = 'Batch cleared. Choose ZIP files to start again.'; });
+  $('sample').addEventListener('click', () => {
+    const samples = [{"name": "good-stored.zip", "data": "UEsDBBQAAAAAAAAAIVwD7SeHwwEAAMMBAAAPAAAAaW1zbWFuaWZlc3QueG1sPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48bWFuaWZlc3QgeG1sbnM9Imh0dHA6Ly93d3cuaW1zcHJvamVjdC5vcmcveHNkL2ltc2NwX3Jvb3R2MXAxcDIiIGlkZW50aWZpZXI9Im0xIiA+PG1ldGFkYXRhPjxzY2hlbWE+QURMIFNDT1JNPC9zY2hlbWE+PHNjaGVtYXZlcnNpb24+MS4yPC9zY2hlbWF2ZXJzaW9uPjwvbWV0YWRhdGE+PG9yZ2FuaXphdGlvbnM+PG9yZ2FuaXphdGlvbiBpZGVudGlmaWVyPSJvMSI+PGl0ZW0gaWRlbnRpZmllcj0iaTEiIGlkZW50aWZpZXJyZWY9InIxIi8+PC9vcmdhbml6YXRpb24+PC9vcmdhbml6YXRpb25zPjxyZXNvdXJjZXM+PHJlc291cmNlIGlkZW50aWZpZXI9InIxIiB0eXBlPSJ3ZWJjb250ZW50IiBocmVmPSJpbmRleC5odG1sIj48ZmlsZSBocmVmPSJpbmRleC5odG1sIi8+PC9yZXNvdXJjZT48L3Jlc291cmNlcz48L21hbmlmZXN0PlBLAwQUAAAAAAAAACFcXyWOyiIAAAAiAAAACgAAAGluZGV4Lmh0bWw8aDE+U3ludGhldGljIHRyYWluaW5nIGNvdXJzZTwvaDE+UEsBAhQDFAAAAAAAAAAhXAPtJ4fDAQAAwwEAAA8AAAAAAAAAAAAAAIABAAAAAGltc21hbmlmZXN0LnhtbFBLAQIUAxQAAAAAAAAAIVxfJY7KIgAAACIAAAAKAAAAAAAAAAAAAACAAfABAABpbmRleC5odG1sUEsFBgAAAAACAAIAdQAAADoCAAAAAA=="}];
+    check(samples.slice(0, 1).map(s => new File([Uint8Array.from(atob(s.data), c => c.charCodeAt(0))], s.name, { type: 'application/zip' })));
+  });
+})();
+
+</script>
+</body></html>

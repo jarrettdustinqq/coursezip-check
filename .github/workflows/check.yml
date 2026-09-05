@@ -1,0 +1,45 @@
+name: Preview checks and interest snapshot
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '23 9 * * *'
+  workflow_dispatch:
+    inputs:
+      failure_probe:
+        description: Deliberately fail this run to verify failure detection (no product changes)
+        type: boolean
+        default: false
+permissions:
+  contents: read
+  issues: read
+concurrency:
+  group: preview-check
+  cancel-in-progress: false
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install test-only XML adapter
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Build and test the delivered engine
+        run: |
+          python3 tests/make_fixtures.py
+          python3 build.py
+          npm test
+          git diff --exit-code -- CourseZip-Check-Free.html
+      - name: Delivery and demand snapshot
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: python3 tests/remote_snapshot.py
+      - name: Deliberate recovery drill
+        if: ${{ inputs.failure_probe == true }}
+        run: |
+          echo 'Expected failure drill. No source, release, payment, or customer data changed.'
+          exit 1

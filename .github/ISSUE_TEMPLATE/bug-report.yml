@@ -1,0 +1,19 @@
+name: Preview bug report
+description: Report an issue without uploading proprietary course content.
+title: "Preview: "
+body:
+  - type: markdown
+    attributes:
+      value: "This issue is public. Do not attach real course ZIPs or reports containing private names. Use a synthetic minimal example if needed."
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true

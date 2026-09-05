@@ -1,0 +1,35 @@
+name: Batch edition — nonbinding interest
+description: Help evaluate a $19 offline batch checker. This is not an order or payment commitment.
+title: "Batch edition interest"
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: "This issue is public. Do not upload courses, customer names, confidential filenames, or personal contact details. The batch edition is not yet for sale."
+  - type: dropdown
+    id: volume
+    attributes:
+      label: How many SCORM packages do you check in a typical month?
+      options:
+        - "1–5"
+        - "6–20"
+        - "21 or more"
+    validations:
+      required: true
+  - type: dropdown
+    id: price
+    attributes:
+      label: Would offline batch checks and exportable reports justify a one-time $19 price for your work?
+      options:
+        - "Yes, I would consider buying at $19 after trying it"
+        - "Maybe, depending on compatibility"
+        - "No, the free single-package check is enough"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Which packaging problem do you need to catch?
+      description: Describe the problem in general terms. No proprietary course material.
+    validations:
+      required: true
