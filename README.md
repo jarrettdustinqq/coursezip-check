@@ -2,7 +2,7 @@
 
 **Free, offline SCORM packaging preflight. Preview 0.1.0.**
 
-[Download the single-file checker](https://github.com/jarrettdustinqq/coursezip-check/releases/latest/download/CourseZip-Check-Free.html), then open the saved HTML file in a current browser. Select a course ZIP or try the synthetic sample. No server, installation, account, telemetry, or course upload is required. Original ZIPs are never changed.
+[Download the single-file checker](https://github.com/jarrettdustinqq/coursezip-check/releases/download/v0.1.0-preview/CourseZip-Check-Free.html), then open the saved HTML file in a current browser. Select a course ZIP or try the synthetic sample. No server, installation, account, telemetry, or course upload is required. Original ZIPs are never changed.
 
 This preview is for e-learning developers and LMS administrators checking incoming course packages. A root manifest inside an extra folder, a missing declared launch file, or a letter-case mismatch can break imports. The checker inspects those packaging details before an LMS test.
 
