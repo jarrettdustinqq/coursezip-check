@@ -19,6 +19,13 @@ if release:
 else:
     lines += ['No published preview yet; release delivery check deferred.']
 interest=summarize(read_issues(repo),repo.split('/')[0])
+try:
+    proposal=api('repos/moosensei/awesome-moodle/pulls/8')
+    placement='merged' if proposal.get('merged') else proposal.get('state','unknown')
+except (subprocess.CalledProcessError, json.JSONDecodeError):
+    placement='unavailable; retry the public status check later'
+lines += [f'Directory contribution: https://github.com/moosensei/awesome-moodle/pull/8 — {placement}. '
+          'This records review/placement status only, not qualified exposure, demand or sales. No messages are sent.']
 lines += ['Interest evidence across all available issue pages: '+json.dumps(interest,sort_keys=True),
 'Owner and recognized bot submissions are excluded from external-account counts; repeated submissions from one account count once. Distinct accounts are not verified independent people. Manual qualification must establish actual recurring work, relevant need and stated-price interest; these counts are not sales.',
 'No external responses or insufficient qualified exposure is inconclusive, not evidence that nobody wants the product.',
