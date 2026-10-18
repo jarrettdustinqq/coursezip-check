@@ -5,19 +5,19 @@ from interest_evidence import read_issues, summarize
 repo=os.environ['REPO']
 def api(endpoint):
     return json.loads(subprocess.check_output(['gh','api',endpoint],text=True))
-releases=api(f'repos/{repo}/releases')
-release=next((r for r in releases if not r['draft'] and r['tag_name']=='v0.1.0-preview'),None)
+release_tag='v0.1.1-preview'
+release=api(f'repos/{repo}/releases/tags/{release_tag}')
 lines=['## Preview evidence','Automated engine checks passed. This is not a sales or browser-compatibility result.']
-if release:
+if not release['draft'] and release['tag_name']==release_tag:
     asset=next(a for a in release['assets'] if a['name']=='CourseZip-Check-Free.html')
     with tempfile.TemporaryDirectory() as folder:
-        subprocess.run(['gh','release','download','v0.1.0-preview','--repo',repo,'--pattern','CourseZip-Check-Free.html','--dir',folder],check=True)
+        subprocess.run(['gh','release','download',release_tag,'--repo',repo,'--pattern','CourseZip-Check-Free.html','--dir',folder],check=True)
         actual=hashlib.sha256((Path(folder)/'CourseZip-Check-Free.html').read_bytes()).hexdigest()
         expected=hashlib.sha256(Path('CourseZip-Check-Free.html').read_bytes()).hexdigest()
         if actual!=expected: raise SystemExit('Public release differs from the committed preview. Investigate before any sales.')
     lines += ['Public release download matches the committed artifact.',f"Platform download counter before this run: {asset['download_count']}. This includes our automated checks; it is not a buyer count."]
 else:
-    lines += ['No published preview yet; release delivery check deferred.']
+    raise SystemExit(f'Expected published release {release_tag}; release delivery check failed.')
 interest=summarize(read_issues(repo),repo.split('/')[0])
 try:
     proposal=api('repos/moosensei/awesome-moodle/pulls/8')

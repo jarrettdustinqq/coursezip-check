@@ -1,8 +1,8 @@
 # CourseZip Check
 
-**Free, offline SCORM packaging preflight. Preview 0.1.0.**
+**Free, offline SCORM packaging preflight. Preview 0.1.1 (description correction).**
 
-[Download the single-file checker](https://github.com/jarrettdustinqq/coursezip-check/releases/download/v0.1.0-preview/CourseZip-Check-Free.html), then open the saved HTML file in a current browser. Select a course ZIP or try the synthetic sample. No server, installation, account, telemetry, or course upload is required. Original ZIPs are never changed.
+[Download the single-file checker](https://github.com/jarrettdustinqq/coursezip-check/releases/download/v0.1.1-preview/CourseZip-Check-Free.html), then open the saved HTML file in a current browser. Select a course ZIP or try the synthetic sample. No server, installation, account, telemetry, or course upload is required. Original ZIPs are never changed.
 
 This preview is for e-learning developers and LMS administrators checking incoming course packages. A root manifest inside an extra folder, a missing declared launch file, or a letter-case mismatch can break imports. The checker inspects those packaging details before an LMS test.
 
@@ -31,7 +31,7 @@ npm ci --ignore-scripts --no-audit --no-fund
 npm test
 ```
 
-The XML adapter is a development-only dependency; the distributed HTML uses browser-native XML and decompression. Tests evaluate the engine extracted from the distributed HTML in a context with network APIs absent. A separate hosted Chromium job exercises the actual file-input UI with networking disabled; its artifact hash matches the public release. See [the verified run](https://github.com/jarrettdustinqq/coursezip-check/actions/runs/33990190580) for the exact scope.
+The XML adapter is a development-only dependency; the distributed HTML uses browser-native XML and decompression. Tests evaluate the engine extracted from the distributed HTML in a context with network APIs absent. A separate hosted Chromium job exercises the actual file-input UI with networking disabled. The [0.1.1 release notes](https://github.com/jarrettdustinqq/coursezip-check/releases/tag/v0.1.1-preview) link the exact validation run and artifact hash. The delivery check fails if that release is missing, unpublished, or its downloaded bytes differ from the committed artifact.
 
 ## Privacy
 
