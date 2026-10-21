@@ -43,7 +43,7 @@ MIT. Copyright 2026 Jarrett Robertson. The free preview can be used and modified
 
 ## Inspect or stop the preview checks
 
-The GitHub Actions workflow checks the free artifact and records release-download and public-interest counters at 09:23 UTC daily, and on changes/manual requests. It does not access payments, send outreach, change releases, or repair software automatically. Download counts include automated verification and are not buyer counts. GitHub may delay schedules or disable schedules after prolonged repository inactivity.
+The GitHub Actions workflow checks the free artifact and records release-download and public-interest counters at 09:23 UTC daily, and on main-branch changes/manual requests. Pull requests run the offline engine, browser, build and interest-counting checks; their candidate artifact is not compared against the previous published release. It does not access payments, send outreach, change releases, or repair software automatically. Download counts include automated verification and are not buyer counts. GitHub may delay schedules or disable schedules after prolonged repository inactivity.
 
 Inspect runs in this repository’s **Actions** tab. Disable **Preview checks and interest snapshot** to stop it; re-enable and run it manually to resume. A transient failure can be retried with a manual run. The failure-probe option deliberately fails one run without changing the product. Review commercial evidence after 14 days; no traffic is inconclusive, and nonbinding interest is weaker evidence than a purchase.
 

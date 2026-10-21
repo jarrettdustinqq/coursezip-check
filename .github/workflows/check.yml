@@ -2,6 +2,8 @@ name: Preview checks and interest snapshot
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   schedule:
     - cron: '23 9 * * *'
   workflow_dispatch:
@@ -14,7 +16,7 @@ permissions:
   contents: read
   issues: read
 concurrency:
-  group: preview-check
+  group: preview-check-${{ github.ref }}
   cancel-in-progress: false
 jobs:
   browser:
@@ -53,13 +55,14 @@ jobs:
           python3 build.py
           npm test
           git diff --exit-code -- CourseZip-Check-Free.html
+      - name: Test interest evidence counting
+        run: python3 -m unittest discover -s tests -p 'test_interest_evidence.py' -v
       - name: Delivery and demand snapshot
+        if: ${{ github.event_name != 'pull_request' }}
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
-        run: |
-          python3 -m unittest discover -s tests -p 'test_interest_evidence.py' -v
-          python3 tests/remote_snapshot.py
+        run: python3 tests/remote_snapshot.py
       - name: Deliberate recovery drill
         if: ${{ inputs.failure_probe == true }}
         run: |
